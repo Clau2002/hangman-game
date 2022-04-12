@@ -1,0 +1,15 @@
+﻿<Application x:Class="Hangman.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Hangman"
+             xmlns:viewModel="clr-namespace:Hangman.ViewModel"
+             xmlns:view="clr-namespace:Hangman.View"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type viewModel:GameViewModel}">
+                <view:GameView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
