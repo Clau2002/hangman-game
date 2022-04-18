@@ -58,7 +58,9 @@
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\RelayCommand2.cs" />
+    <Compile Include="Services\CurrentPlayer.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ButtonsClass.cs" />
     <Compile Include="ViewModel\GameViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\GameView.xaml.cs">
@@ -112,7 +114,12 @@
     <Resource Include="Images\images.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Themes\" />
+    <Resource Include="Images\hangman1.png" />
+    <Resource Include="Images\hangman2.png" />
+    <Resource Include="Images\hangman3.png" />
+    <Resource Include="Images\hangman4.png" />
+    <Resource Include="Images\hangman5.png" />
+    <Resource Include="Images\hangman6.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\newUser.png" />

@@ -16,18 +16,23 @@ namespace Hangman
     public partial class App : Application
     {
         //private readonly Player _player;
+        //private readonly NavigationStore _navigationStore;
 
         //public App()
         //{
         //    _player = new Player();
+        //    _navigationStore = new NavigationStore();
         //}
 
         //protected override void OnStartup(StartupEventArgs e)
         //{
+        //    _navigationStore.CurrentViewModel = new LoginViewModel();
+
         //    MainWindow = new MainWindow()
         //    {
-        //        DataContext = new MainViewModel()  
+        //        DataContext = new MainViewModel(_navigationStore)
         //    };
+        //    MainWindow.Show();
 
         //    base.OnStartup(e);
         //}

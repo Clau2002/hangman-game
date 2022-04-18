@@ -12,14 +12,20 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-
+using Hangman.Services;
 
 namespace Hangman.ViewModel
 {
     class MainViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Player> Players { get; set; }
-        private string[] _players = System.IO.File.ReadAllLines(@"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Files\PlayersFile.txt");
+        private string path = @"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Files\PlayersFile.txt";
+        private string[] _players;
+        public List<string> paths;
+        CurrentPlayer _currentPlayer;
+
+        
+
         //private Player currentPlayer;
         //public Player CurrentPlayer
         //{
@@ -35,12 +41,16 @@ namespace Hangman.ViewModel
         public MainViewModel()
         {
             Players = new ObservableCollection<Player>();
-
+            paths = new List<string>();
+            paths.Add("Images/images.jpg");
+            paths.Add("Images/hangman.png");
+            _players = System.IO.File.ReadAllLines(path);
             foreach (string name in _players)
             {
                 Players.Add(new Player(name));
             }
 
+            _currentPlayer = new CurrentPlayer(_selectedPlayer);
             //GameVM = new GameViewModel();
 
             //GameViewCommand = new RelayCommand2(o =>
@@ -62,7 +72,8 @@ namespace Hangman.ViewModel
         }
 
         private Player _selectedPlayer;
-        public Player SelectedPlayer { 
+        public Player SelectedPlayer
+        {
             get { return _selectedPlayer; }
             set
             {
@@ -72,14 +83,14 @@ namespace Hangman.ViewModel
             }
         }
 
-        private void DeletePlayer()
+        private void DeletePlayer(object parameter)
         {
             if (SelectedPlayer != null)
             {
-                List<string> lines = File.ReadAllLines(@"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Files\PlayersFile.txt").ToList();
+                List<string> lines = File.ReadAllLines(path).ToList();
                 lines.RemoveAt(Players.IndexOf(SelectedPlayer));
                 Players.Remove(SelectedPlayer);
-                File.WriteAllLines((@"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Files\PlayersFile.txt"), lines.ToArray());
+                File.WriteAllLines(path, lines.ToArray());
             }
             else
             {
@@ -87,19 +98,22 @@ namespace Hangman.ViewModel
             }
         }
 
-        private void AddPlayer()
+        private void AddPlayer(object parameter)
         {
             Players.Add(new Player(newPlayer));
 
-            using (StreamWriter writer = File.AppendText(@"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Files\PlayersFile.txt"))
+            using (StreamWriter writer = File.AppendText(path))
             {
                 writer.WriteLine(newPlayer);
             }
+
+            newPlayer = "";
+            OnPropertyChanged(nameof(newPlayer));
         }
 
-        private void ChangeView()
+        private void ChangeView(object parameter)
         {
-            GameVM = new GameViewModel();
+            GameVM = new GameViewModel(SelectedPlayer.Username);
             CurrentView = GameVM;
         }
 
@@ -167,6 +181,26 @@ namespace Hangman.ViewModel
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
+        {
+            if (!Equals(field, newValue))
+            {
+                field = newValue;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                return true;
+            }
+
+            return false;
+        }
+
+        private System.Windows.Media.ImageSource newImagePath;
+
+        public System.Windows.Media.ImageSource NewImagePath
+        {
+            get => newImagePath;
+            set => SetProperty(ref newImagePath, value);
         }
     }
 }

@@ -4,16 +4,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:Hangman.ViewModel"
+        xmlns:view="clr-namespace:Hangman.View"
         xmlns:local="clr-namespace:Hangman"
         mc:Ignorable="d"
-        Title="MainWindow1" Height="650" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+        Title="Hangman" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" AllowDrop="False">
+
+
+    <!--<Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+                <view:LoginView/>
+            </DataTemplate>   
+            
+            <DataTemplate DataType="{x:Type viewModel:GameViewModel}">
+                <view:GameView/>
+            </DataTemplate>
+        </Grid.Resources>
+
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+    </Grid>-->
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
+
     <Grid>
-        <Grid x:Name="MyGrid" Background="#1E2124">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="481*"/>
+            <RowDefinition Height="141*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="MyGrid" Background="#1E2124" Margin="0,0,-0.333,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
@@ -33,7 +54,7 @@
             <TextBlock Text="Rankings" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="Red" Grid.Row="0" Grid.Column="4"/>
             <TextBlock Text="~Hangman~" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="ExtraBlack" Foreground="Coral" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"/>
 
-            <ListView Name="PlayersList" ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}" Grid.Row="1" Grid.Column="0" Background="#1E2124" BorderThickness="0">
+            <ListView Name="PlayersList" ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}" Grid.Row="1" Grid.Column="0" Background="#1E2124" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ListBoxItem Content="{Binding Username}" FontSize="35" Foreground="Cyan" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -49,7 +70,7 @@
             </TextBox>
 
             <WrapPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Width="400" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Image Source="Images/images.jpg" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Image Source="{Binding NewImagePath}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </WrapPanel>
 
             <Button 
@@ -137,11 +158,11 @@
                 </Button.Template>
             </Button>
 
-            <!--<Button Content="test" Grid.Column="4" Grid.Row="3" Command="{Binding g}"/>-->
+            <!--<Button Content="test" Grid.Column="4" Grid.Row="3" Command="{Binding g}"/>
 
-            <!--<ContentControl Content="{Binding CurrentView}"/>-->
+            <ContentControl Content="{Binding CurrentView}"/>-->
         </Grid>
-        <ContentControl Content="{Binding CurrentView}"/>
+        <ContentControl Content="{Binding CurrentView}" Margin="0,0,-0.333,0" Grid.RowSpan="2"/>
     </Grid>
-    
+
 </Window>

@@ -8,6 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/hangman.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/hangman1.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/hangman2.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/hangman3.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/hangman4.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/hangman5.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/hangman6.png")]
 
 

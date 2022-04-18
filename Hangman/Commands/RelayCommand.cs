@@ -9,8 +9,8 @@ namespace Hangman.Commands
 {
     class RelayCommand : ICommand
     {
-        //private Action<object> _execute;
-        //private Func<object, bool> _canExecute;
+        private Action<object> _execute;
+        private Func<object, bool> _canExecute;
         //private Action addPlayer;
 
         //public event EventHandler CanExecuteChanged
@@ -19,11 +19,11 @@ namespace Hangman.Commands
         //    remove { CommandManager.RequerySuggested -= value; }
         //}
 
-        //public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
-        //{
-        //    _execute = execute;
-        //    _canExecute = canExecute;
-        //}
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
 
         //public RelayCommand(Action addPlayer)
         //{
@@ -40,12 +40,24 @@ namespace Hangman.Commands
         //    _execute(parameter);
         //}
 
-        private Action commandTask;
+        //private Action commandTask;
 
-        public RelayCommand(Action workToDo)
+        ////public object _v;
+
+        //public RelayCommand(Action workToDo)
+        //{
+        //    commandTask = workToDo;
+        //}
+
+        public RelayCommand(Action<object> execute)
         {
-            commandTask = workToDo;
+            _execute = execute;
         }
+
+        //public RelayCommand(object v)
+        //{
+        //    _v = v;
+        //}
 
         public bool CanExecute(object parameter)
         {
@@ -67,7 +79,7 @@ namespace Hangman.Commands
 
         public void Execute(object parameter)
         {
-            commandTask();
+            _execute(parameter);
         }
     }
 }
