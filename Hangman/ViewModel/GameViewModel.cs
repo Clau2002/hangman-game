@@ -22,13 +22,12 @@ namespace Hangman.ViewModel
         private CurrentPlayer _currentPlayer;
         public ObservableCollection<KeyboardButton> ButtonsCollection { get; set; }
 
-        //private string _imgPath;
-        private string word;
-        private string wordToGuess;
-        private string test;
+        private string _initialWord;
+        private string _wordToGuess;
+        private string _createKeyboard;
 
-        private ICommand testCommand;
-        private ICommand resetCommand;
+        private ICommand createKeyboardCommand;
+        private ICommand newGameCommand;
 
         public int Stage { get; set; }
 
@@ -38,11 +37,11 @@ namespace Hangman.ViewModel
 
         public string WordToGuess
         {
-            get { return wordToGuess; }
+            get { return _wordToGuess; }
             set
             {
-                if (wordToGuess == value) return;
-                wordToGuess = value;
+                if (_wordToGuess == value) return;
+                _wordToGuess = value;
                 NotifyPropertyChanged(nameof(WordToGuess));
             }
         }
@@ -52,13 +51,13 @@ namespace Hangman.ViewModel
             get { return WordToGuess; }
         }
 
-        public string Test
+        public string CreateKeyboard
         {
-            get { return test; }
+            get { return _createKeyboard; }
             set
             {
-                if (test == value) return;
-                test = value;
+                if (_createKeyboard == value) return;
+                _createKeyboard = value;
                 NotifyPropertyChanged("Test");
             }
         }
@@ -68,8 +67,8 @@ namespace Hangman.ViewModel
             ButtonsCollection = new ObservableCollection<KeyboardButton>();
             _currentPlayer = new CurrentPlayer(new Player(currentPlayer));
             Stage = 1;
-            word = RandomWordGenerator();
-            wordToGuess = new string('*', word.Length);
+            _initialWord = RandomWordGenerator();
+            _wordToGuess = new string('*', _initialWord.Length);
             ImgPath = @"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Images\hangman" + Stage + ".png";
 
             for (int i = 65; i < 91; i++)
@@ -87,14 +86,14 @@ namespace Hangman.ViewModel
             return words[random.Next(words.Length)];
         }
 
-        public void TestFct(object param)
+        public void KeyboardFunc(object param)
         {
             bool found = false;
             char index_chr = '-';
             int counter = 0;
             //Stage = 1;
 
-            foreach (var item in word)
+            foreach (var item in _initialWord)
             {
                 // counter = 0;
                 if (item.ToString() == ButtonsCollection.ToList().Find(e => e.Letter == param).Letter)
@@ -102,9 +101,9 @@ namespace Hangman.ViewModel
                     found = true;
                     index_chr = item;
                     ButtonsCollection.ToList().Find(e => e.Letter == param).Button_Visibility = false;
-                    char[] array = wordToGuess.ToCharArray();
+                    char[] array = _wordToGuess.ToCharArray();
                     array[counter] = index_chr;
-                    wordToGuess = new string(array);
+                    _wordToGuess = new string(array);
 
                     NotifyPropertyChanged(nameof(WordToGuess));
                 }
@@ -123,14 +122,14 @@ namespace Hangman.ViewModel
                 NotifyPropertyChanged(nameof(ImgPath));
             }
 
-            if (wordToGuess.Contains(word) && Stage < 6)
+            if (_wordToGuess.Contains(_initialWord) && Stage < 6)
             {
                 MessageBox.Show("Congrats!");
                 foreach (var item in ButtonsCollection)
                 {
                     item.Button_Visibility = true;
-                    word = RandomWordGenerator();
-                    wordToGuess = new string('*', word.Length);
+                    _initialWord = RandomWordGenerator();
+                    _wordToGuess = new string('*', _initialWord.Length);
                     ImgPath = @"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Images\hangman1.png";
                     Stage = 1;
                     NotifyPropertyChanged(nameof(Stage));
@@ -145,8 +144,8 @@ namespace Hangman.ViewModel
                 foreach (var item in ButtonsCollection)
                 {
                     item.Button_Visibility = true;
-                    word = RandomWordGenerator();
-                    wordToGuess = new string('*', word.Length);
+                    _initialWord = RandomWordGenerator();
+                    _wordToGuess = new string('*', _initialWord.Length);
                     ImgPath = @"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Images\hangman1.png";
                     Stage = 1;
                     NotifyPropertyChanged(nameof(Stage));
@@ -156,13 +155,13 @@ namespace Hangman.ViewModel
             }
         }
 
-        public void Reset(object parameter)
+        public void NewGame(object parameter)
         {
             foreach (var item in ButtonsCollection)
             {
                 item.Button_Visibility = true;
-                word = RandomWordGenerator();
-                wordToGuess = new string('*', word.Length);
+                _initialWord = RandomWordGenerator();
+                _wordToGuess = new string('*', _initialWord.Length);
                 ImgPath = @"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Images\hangman1.png";
                 Stage = 1;
                 NotifyPropertyChanged(nameof(Stage));
@@ -171,23 +170,23 @@ namespace Hangman.ViewModel
             }
         }
 
-        public ICommand ResetCommand
+        public ICommand NewGameCommand
         {
             get
             {
-                if (resetCommand == null)
-                    resetCommand = new RelayCommand(Reset);
-                return resetCommand;
+                if (newGameCommand == null)
+                    newGameCommand = new RelayCommand(NewGame);
+                return newGameCommand;
             }
         }
 
-        public ICommand TestCommand
+        public ICommand CreateKeyboardCommand
         {
             get
             {
-                if (testCommand == null)
-                    testCommand = new RelayCommand(TestFct);
-                return testCommand;
+                if (createKeyboardCommand == null)
+                    createKeyboardCommand = new RelayCommand(KeyboardFunc);
+                return createKeyboardCommand;
             }
         }
 
