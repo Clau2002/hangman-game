@@ -22,21 +22,16 @@ namespace Hangman.ViewModel
         private string path = @"C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Files\PlayersFile.txt";
         private string[] _players;
         public List<string> paths;
-        CurrentPlayer _currentPlayer;
+        private CurrentPlayer _currentPlayer;
+        private string newPlayer;
+        private Player _selectedPlayer;
+        private object _currentView;
 
+        private ICommand addPlayerCommand;
+        private ICommand deletePlayerCommand;
+        private ICommand changeViewCommand;
         
-
-        //private Player currentPlayer;
-        //public Player CurrentPlayer
-        //{
-        //    get { return currentPlayer; }
-        //    set
-        //    {
-        //        if (currentPlayer == value) return;
-        //        currentPlayer = value;
-        //        NotifyPropertyChanged("CurrentPerson");
-        //    }
-        //}
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public MainViewModel()
         {
@@ -44,22 +39,17 @@ namespace Hangman.ViewModel
             paths = new List<string>();
             paths.Add("Images/images.jpg");
             paths.Add("Images/hangman.png");
-            _players = System.IO.File.ReadAllLines(path);
+            _players = File.ReadAllLines(path);
+
             foreach (string name in _players)
             {
                 Players.Add(new Player(name));
             }
 
             _currentPlayer = new CurrentPlayer(_selectedPlayer);
-            //GameVM = new GameViewModel();
-
-            //GameViewCommand = new RelayCommand2(o =>
-            //{
-            //    CurrentView = GameVM;
-            //});
         }
 
-        private string newPlayer;
+        
         public string NewPlayer
         {
             get { return newPlayer; }
@@ -71,7 +61,7 @@ namespace Hangman.ViewModel
             }
         }
 
-        private Player _selectedPlayer;
+        
         public Player SelectedPlayer
         {
             get { return _selectedPlayer; }
@@ -111,57 +101,6 @@ namespace Hangman.ViewModel
             OnPropertyChanged(nameof(newPlayer));
         }
 
-        private void ChangeView(object parameter)
-        {
-            GameVM = new GameViewModel(SelectedPlayer.Username);
-            CurrentView = GameVM;
-        }
-
-        private ICommand addPlayerCommand;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ICommand AddPlayerCommand
-        {
-            get
-            {
-                if (addPlayerCommand == null)
-                    addPlayerCommand = new RelayCommand(AddPlayer);
-                return addPlayerCommand;
-            }
-        }
-
-        private ICommand deletePlayerCommand;
-
-        public ICommand DeletePlayerCommand
-        {
-            get
-            {
-                if (deletePlayerCommand == null)
-                    deletePlayerCommand = new RelayCommand(DeletePlayer);
-                return deletePlayerCommand;
-            }
-        }
-
-        private ICommand changeViewCommand;
-
-        public ICommand ChangeViewCommand
-        {
-            get
-            {
-                if (changeViewCommand == null)
-                    changeViewCommand = new RelayCommand(ChangeView);
-                return changeViewCommand;
-            }
-        }
-
-        public RelayCommand GameViewCommand { get; set; }
-
-        //public RelayCommand2 GameViewCommand { get; set; }
-        public GameViewModel GameVM { get; set; }
-
-        private object _currentView;
-
         public object CurrentView
         {
             get { return _currentView; }
@@ -171,6 +110,46 @@ namespace Hangman.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public GameViewModel GameVM { get; set; }
+
+        private void ChangeView(object parameter)
+        {
+            GameVM = new GameViewModel(SelectedPlayer.Username);
+            CurrentView = GameVM;
+        }
+
+        public RelayCommand GameViewCommand { get; set; }
+
+        public ICommand AddPlayerCommand
+        {
+            get
+            {
+                if (addPlayerCommand == null)
+                    addPlayerCommand = new RelayCommand(AddPlayer);
+                return addPlayerCommand;
+            }
+        }        
+
+        public ICommand DeletePlayerCommand
+        {
+            get
+            {
+                if (deletePlayerCommand == null)
+                    deletePlayerCommand = new RelayCommand(DeletePlayer);
+                return deletePlayerCommand;
+            }
+        }        
+
+        public ICommand ChangeViewCommand
+        {
+            get
+            {
+                if (changeViewCommand == null)
+                    changeViewCommand = new RelayCommand(ChangeView);
+                return changeViewCommand;
+            }
+        }       
 
         private void NotifyPropertyChanged(string propertyName)
         {
@@ -183,24 +162,22 @@ namespace Hangman.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
-        {
-            if (!Equals(field, newValue))
-            {
-                field = newValue;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
+        //protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
+        //{
+        //    if (!Equals(field, newValue))
+        //    {
+        //        field = newValue;
+        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
-        private System.Windows.Media.ImageSource newImagePath;
-
-        public System.Windows.Media.ImageSource NewImagePath
-        {
-            get => newImagePath;
-            set => SetProperty(ref newImagePath, value);
-        }
+        //public System.Windows.Media.ImageSource NewImagePath
+        //{
+        //    get => newImagePath;
+        //    set => SetProperty(ref newImagePath, value);
+        //}
     }
 }

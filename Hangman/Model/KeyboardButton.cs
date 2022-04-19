@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace Hangman.ViewModel
+namespace Hangman.Model
 {
-    class ButtonsClass : INotifyPropertyChanged
+    class KeyboardButton : INotifyPropertyChanged
     {
         private string _letter;
 
@@ -34,7 +34,7 @@ namespace Hangman.ViewModel
             }
         }
 
-        public ButtonsClass(string letter, bool visibility)
+        public KeyboardButton(string letter, bool visibility)
         {
             Letter = letter;
             Button_Visibility = visibility;

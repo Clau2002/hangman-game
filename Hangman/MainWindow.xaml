@@ -7,22 +7,8 @@
         xmlns:view="clr-namespace:Hangman.View"
         xmlns:local="clr-namespace:Hangman"
         mc:Ignorable="d"
-        Title="Hangman" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" AllowDrop="False">
+        Title="Hangman" Height="620" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" AllowDrop="False">
 
-
-    <!--<Grid>
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
-                <view:LoginView/>
-            </DataTemplate>   
-            
-            <DataTemplate DataType="{x:Type viewModel:GameViewModel}">
-                <view:GameView/>
-            </DataTemplate>
-        </Grid.Resources>
-
-        <ContentControl Content="{Binding CurrentViewModel}"/>
-    </Grid>-->
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
@@ -51,7 +37,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Players" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="Green" Grid.Row="0" Grid.Column="0"/>
-            <TextBlock Text="Rankings" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="Red" Grid.Row="0" Grid.Column="4"/>
+            <!--<TextBlock Text="Rankings" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="Red" Grid.Row="0" Grid.Column="4"/>-->
             <TextBlock Text="~Hangman~" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="ExtraBlack" Foreground="Coral" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"/>
 
             <ListView Name="PlayersList" ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}" Grid.Row="1" Grid.Column="0" Background="#1E2124" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
@@ -70,7 +56,7 @@
             </TextBox>
 
             <WrapPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Width="400" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Image Source="{Binding NewImagePath}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Image Source="C:\Users\UltraBook\Desktop\Anul_II\Semestrul_2\MVP\Tema2\Hangman\Hangman\Images\images.jpg" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </WrapPanel>
 
             <Button 
@@ -157,10 +143,6 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-
-            <!--<Button Content="test" Grid.Column="4" Grid.Row="3" Command="{Binding g}"/>
-
-            <ContentControl Content="{Binding CurrentView}"/>-->
         </Grid>
         <ContentControl Content="{Binding CurrentView}" Margin="0,0,-0.333,0" Grid.RowSpan="2"/>
     </Grid>

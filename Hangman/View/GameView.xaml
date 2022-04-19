@@ -69,37 +69,19 @@
                 Height="30" Width="80"
                 FontSize="20" 
                 Background="BurlyWood" Foreground="Black" BorderThickness="0"
-                Grid.Column="1" Grid.Row="1">            
+                Grid.Column="2" Grid.Row="3">            
         </Button>
 
         <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Margin="7">
             <Image Source="{Binding ImgPath}"/>
         </StackPanel>
 
-        
-        <!--<StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Margin="15"
-                    Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Background="Blue">
-            <StackPanel x:Name="firstRow"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center" Background="Beige"/>
-            <StackPanel x:Name="secondRow"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center" Background="AntiqueWhite"/>
-            <StackPanel x:Name="thirdRow"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center" Background="AliceBlue"/>
-        </StackPanel>-->
-
-
         <ItemsControl Margin="15"
                   Grid.Row="3"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   ItemsSource="{Binding ButtonsCollection}"
-                  HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                  >
+                  HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Content="{Binding Letter}"
@@ -118,78 +100,5 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        
-        <!--<ListView HorizontalAlignment="Center"
-                  VerticalAlignment="Bottom"
-                  Margin="15"
-                  Grid.Row="3"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="3"
-                  ItemsSource="{Binding ButtonsCollection}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ListViewItem Content="{Binding}" FontSize="35" Foreground="Cyan" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    --><!--<Button Content="Binding"/>--><!--
-                </DataTemplate>
-            </ListView.ItemTemplate>
-
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>-->
-        
-        
-
-        <!--<Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="23" Margin="15" Background="Transparent">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <Button Content="Q" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="0" Grid.Row="0"/>
-            <Button Content="W" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="1" Grid.Row="0"/>
-            <Button Content="E" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="2" Grid.Row="0"/>
-            <Button Content="R" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="3" Grid.Row="0"/>
-            <Button Content="T" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="4" Grid.Row="0"/>
-            <Button Content="Y" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="5" Grid.Row="0"/>
-            <Button Content="U" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="6" Grid.Row="0"/>
-            <Button Content="I" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="7" Grid.Row="0"/>
-            <Button Content="O" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="8" Grid.Row="0"/>
-            <Button Content="P" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="9" Grid.Row="0"/>
-
-            <Button Content="A" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="0" Grid.Row="1"/>
-            <Button Content="S" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="1" Grid.Row="1"/>
-            <Button Content="D" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="2" Grid.Row="1"/>
-            <Button Content="F" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="3" Grid.Row="1"/>
-            <Button Content="G" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="4" Grid.Row="1"/>
-            <Button Content="H" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="5" Grid.Row="1"/>
-            <Button Content="J" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="6" Grid.Row="1"/>
-            <Button Content="K" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="7" Grid.Row="1"/>
-            <Button Content="L" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="8" Grid.Row="1"/>
-
-            <Button Content="Z" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="1" Grid.Row="2"/>
-            <Button Content="X" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="2" Grid.Row="2"/>
-            <Button Content="C" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="3" Grid.Row="2"/>
-            <Button Content="V" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="4" Grid.Row="2"/>
-            <Button Content="B" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="5" Grid.Row="2"/>
-            <Button Content="N" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="6" Grid.Row="2"/>
-            <Button Content="M" Height="70" Width="80" Background="Black" Foreground="Cyan" FontSize="24" Grid.Column="7" Grid.Row="2"/>
-        </Grid>-->
     </Grid>
 </UserControl>
