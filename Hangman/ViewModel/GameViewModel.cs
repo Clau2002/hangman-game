@@ -91,11 +91,9 @@ namespace Hangman.ViewModel
             bool found = false;
             char index_chr = '-';
             int counter = 0;
-            //Stage = 1;
 
             foreach (var item in _initialWord)
             {
-                // counter = 0;
                 if (item.ToString() == ButtonsCollection.ToList().Find(e => e.Letter == param).Letter)
                 {
                     found = true;
